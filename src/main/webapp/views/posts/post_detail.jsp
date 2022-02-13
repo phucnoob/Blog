@@ -5,7 +5,7 @@
 
 <c:set var="title" value="${requestScope.get('title')}" />
 
-<c:set var="user" value="${sessionScope.get('islogin')}" />
+<c:set var="login_id" value="${sessionScope.get('login_id')}" />
 <c:set var="is_login" value="${sessionScope.get('is_login')}" />
 
 <t:base title="${title}">
@@ -22,4 +22,10 @@
                 <p class="article-content">${ post.content }</p>
             </div>
         </article>
+        <c:if test="${ is_login != null && login_id eq post.author.user_id }">
+            <div class="float-right">
+                <a href="/post/update/${ post.post_id }" class="btn btn-outline-info mr-2">Update</a>
+                <a href="/post/delete/${ post.post_id }" class="btn btn-outline-danger">Delete</a>
+            </div>
+        </c:if>
 </t:base>

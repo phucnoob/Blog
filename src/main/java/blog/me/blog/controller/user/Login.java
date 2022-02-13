@@ -2,7 +2,6 @@ package blog.me.blog.controller.user;
 
 import blog.me.blog.models.User;
 import blog.me.blog.service.UserServices;
-import blog.me.blog.service.internal.UserServicesImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +25,7 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        UserServices userServices = new UserServicesImpl();
+        UserServices userServices = new UserServices();
 
         int result = userServices.authenticate(username, password);
         String message, tag, is_login, login_id;

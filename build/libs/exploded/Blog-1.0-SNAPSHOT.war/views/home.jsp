@@ -18,7 +18,7 @@
                     <a class="mr-2" href="#">${ post.author.username }</a>
                     <small class="text-muted">${ post.date_posted }</small>
                 </div>
-                <h2><a class="article-title" href="/post-detail?id=${ post.post_id }">${ post.title }</a></h2>
+                <h2><a class="article-title" href="/post/${ post.post_id }">${ post.title }</a></h2>
                 <p class="article-content">${ post.content }</p>
             </div>
         </article>

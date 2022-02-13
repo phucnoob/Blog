@@ -6,6 +6,4 @@
     <h1>About Page</h1>
     <a href="https://www.facebook.com/phuclac2k3/">My facebook</a><br>
     <a href="mailto:phuclinux123@gmail.com">Send me email</a><br>
-
-    <a href="test.jsp">Test Image</a>
 </t:base>

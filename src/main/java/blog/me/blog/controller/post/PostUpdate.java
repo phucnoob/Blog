@@ -4,8 +4,6 @@ import blog.me.blog.Message;
 import blog.me.blog.models.Post;
 import blog.me.blog.models.User;
 import blog.me.blog.service.PostServices;
-import blog.me.blog.service.internal.PostServicesImpl;
-import blog.me.blog.service.internal.UserServicesImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,18 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "post_update", value = "/post/update")
+@WebServlet(name = "post_update", value = "/post/update/*")
 public class PostUpdate extends HttpServlet {
     PostServices services ;
     @Override
     public void init() throws ServletException {
-        services = new PostServicesImpl();
+        services = new PostServices();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
-            int post_id = Integer.parseInt(request.getParameter("id"));
+            String[] text = request.getRequestURI().split("/");
+            // Hardcode is bad!!
+            int post_id = Integer.parseInt(text[text.length - 1]);
             HttpSession session = request.getSession();
             Post post = services.get(post_id);
             int user_id = Integer.parseInt((String) session.getAttribute("login_id"));
@@ -41,7 +41,7 @@ public class PostUpdate extends HttpServlet {
                 request.getRequestDispatcher("/views/posts/post_update.jsp").forward(request, response);
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             response.sendError(404, "Post is not exists");
         }
     }

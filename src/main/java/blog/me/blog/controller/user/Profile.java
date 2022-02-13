@@ -1,8 +1,7 @@
 package blog.me.blog.controller.user;
 
 import blog.me.blog.models.User;
-import blog.me.blog.service.internal.UserServicesImpl;
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import blog.me.blog.service.UserServices;
 import org.imgscalr.Scalr;
 
 import javax.imageio.ImageIO;
@@ -11,7 +10,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -27,7 +25,7 @@ public class Profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("title", "Profile");
-        UserServicesImpl userServices = new UserServicesImpl();
+        UserServices userServices = new UserServices();
         HttpSession session = request.getSession();
 
         User user = userServices.get(Integer.parseInt((String) session.getAttribute("login_id")));
@@ -45,7 +43,7 @@ public class Profile extends HttpServlet {
 
         System.out.println(user_id + username + email);
 //         create a temp user
-        User newUser = new UserServicesImpl().get(user_id);
+        User newUser = new UserServices().get(user_id);
         newUser.setUsername(username);
         newUser.setEmail(email);
 
@@ -72,7 +70,7 @@ public class Profile extends HttpServlet {
         }
 
         // make changes to database
-        boolean result = new UserServicesImpl().update(user_id, newUser);
+        boolean result = new UserServices().update(user_id, newUser);
 
         String message, tag;
         if (result) {

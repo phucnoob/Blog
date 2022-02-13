@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/profile", "/post/*"})
+@WebFilter(urlPatterns = {"/profile", "/post/new", "/post/update/*", "/post/delete/*"})
 public class LoginRequired extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {

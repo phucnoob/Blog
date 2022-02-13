@@ -5,13 +5,11 @@ import blog.me.blog.models.User;
 
 import java.sql.*;
 
-public class UserDao {
-    final static String username = "root";
-    final static String password = "laplace";
-    final static String url = "jdbc:mysql://127.0.0.1:3306/blog_database";
+public class UserDao extends BaseDao{
+
     public User get(int user_id) {
         String SQL = "SELECT * FROM users WHERE user_id = ?;";
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = getConnection();
              PreparedStatement st = conn.prepareStatement(SQL);) {
             st.setString(1, String.valueOf(user_id));
 
@@ -37,7 +35,7 @@ public class UserDao {
     public User get(String _username ) {
         String SQL = "SELECT * FROM users WHERE username = ?;";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = getConnection();
              PreparedStatement st = conn.prepareStatement(SQL);) {
             st.setString(1, String.valueOf(_username));
 
@@ -63,7 +61,7 @@ public class UserDao {
 
     public boolean create(User user) {
         String SQL = "INSERT INTO users(username, password, avatar, email) VALUES(?,?,?,?);";
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = getConnection();
              PreparedStatement st = conn.prepareStatement(SQL);) {
             st.setString(1, String.valueOf(user.getUsername()));
             st.setString(2, String.valueOf(user.getPassword()));
@@ -89,7 +87,7 @@ public class UserDao {
     public int authenticate(String _username, String _password) {
         String SQL = "SELECT user_id ,username, password FROM users WHERE username = ? AND password = ?;";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = getConnection();
              PreparedStatement st = conn.prepareStatement(SQL);) {
             st.setString(1, String.valueOf(_username));
             st.setString(2, String.valueOf(_password));
@@ -117,7 +115,7 @@ public class UserDao {
 
     public boolean update(int user_id, User newUser) {
         String SQL = "UPDATE users SET username = ?, email = ?, avatar = ? WHERE user_id = ?;";
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = getConnection();
              PreparedStatement st = conn.prepareStatement(SQL);) {
             st.setString(1, String.valueOf(newUser.getUsername()));
             st.setString(2, String.valueOf(newUser.getEmail()));

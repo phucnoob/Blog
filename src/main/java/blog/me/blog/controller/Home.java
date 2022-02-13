@@ -1,7 +1,7 @@
 package blog.me.blog.controller;
 
 import blog.me.blog.models.Post;
-import blog.me.blog.service.internal.PostServicesImpl;
+import blog.me.blog.service.PostServices;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        posts = new PostServicesImpl().get_all();
+        posts = new PostServices().get_all();
         request.setAttribute("title", "Home");
         request.setAttribute("posts", posts);
         request.getRequestDispatcher("/views/home.jsp").forward(request, response);

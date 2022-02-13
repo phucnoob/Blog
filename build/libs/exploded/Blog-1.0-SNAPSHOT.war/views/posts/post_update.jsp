@@ -24,9 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control" id="content" name="content" required rows="5">
-                        ${post.content}
-                    </textarea>
+                    <textarea class="form-control" id="content" name="content" required rows="5">${post.content}</textarea>
                     <div class="invalid-feedback">
                         Content should not blank
                     </div>

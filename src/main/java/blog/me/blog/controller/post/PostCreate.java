@@ -2,7 +2,6 @@ package blog.me.blog.controller.post;
 
 import blog.me.blog.Message;
 import blog.me.blog.service.PostServices;
-import blog.me.blog.service.internal.PostServicesImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ public class PostCreate extends HttpServlet {
     PostServices services;
     @Override
     public void init() throws ServletException {
-        services = new PostServicesImpl();
+        services = new PostServices();
     }
 
     @Override
@@ -27,8 +26,6 @@ public class PostCreate extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("INFO: " + request.getRequestURI());
-        request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         int user_id = Integer.parseInt((String)session.getAttribute("login_id"));
         String title = request.getParameter("title");

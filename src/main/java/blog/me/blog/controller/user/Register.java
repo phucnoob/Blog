@@ -2,7 +2,6 @@ package blog.me.blog.controller.user;
 
 import blog.me.blog.models.User;
 import blog.me.blog.service.UserServices;
-import blog.me.blog.service.internal.UserServicesImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +28,7 @@ public class Register extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        UserServices userServices = new UserServicesImpl();
+        UserServices userServices = new UserServices();
         User user = new User(username, email, password);
 
         boolean result = userServices.create(user);
